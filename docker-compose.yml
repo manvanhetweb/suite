@@ -1,0 +1,22 @@
+version: '2'
+services:
+  web:
+    environment:
+      DEBUG: 'true'
+      INSIDE_DOCKER: 'true'
+      C_FORCE_ROOT: 'true'
+    build: .
+    command: ./run_web.sh
+    volumes:
+      - .:/src
+    ports:
+      - "8000:8000"
+    depends_on:
+      - redis
+
+  mysql:
+    image: mysql:5
+
+  redis:
+    image: redis
+
